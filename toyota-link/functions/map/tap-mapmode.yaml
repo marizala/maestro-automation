@@ -1,0 +1,7 @@
+appId: ${APP_ID}
+---
+- tapOn:
+    id: "${APP_ID}:id/button_cycle_map_mode"
+- tapOn:
+    id: "${APP_ID}:id/snackbar_text"
+    
