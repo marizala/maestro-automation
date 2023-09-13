@@ -1,0 +1,37 @@
+appId: ${APP_ID}
+name: Trip CRUD
+tags:
+  - smoke
+onFlowStart:
+  - runFlow: ../functions/common/set-gps.yaml
+  - runScript: ../data/trip-data.js
+---
+- launchApp
+
+# Maestro Cloud execution - check onboard app state (T&C)
+- runFlow: ../functions/onboarding/call-onboard-flow.yaml
+
+- runFlow: ../functions/trips/tap-new.yaml
+- runFlow: ../functions/trips/tap-addstop.yaml
+
+- evalScript: ${output.SET_place = output.place1}
+- runFlow: ../functions/search/select-location.yaml
+- runFlow: ../functions/common/tap-x.yaml
+
+
+# Edit trip, add new stop
+- runFlow: ../functions/trips/open-trip.yaml
+
+- evalScript: ${output.SET_tripname = output.tripname1}
+- runFlow: ../functions/trips/edit-tripname.yaml
+
+- runFlow: ../functions/trips/tap-addstop.yaml
+
+- evalScript: ${output.SET_place = output.place2}
+- runFlow: ../functions/search/select-location.yaml
+
+- runFlow: ../functions/common/tap-x.yaml
+
+# Delete trip
+- runFlow: ../functions/trips/open-trip.yaml
+- runFlow: ../functions/trips/delete-trip.yaml
