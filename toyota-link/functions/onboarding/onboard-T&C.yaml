@@ -1,0 +1,31 @@
+appId: ${APP_ID}
+---
+# Wait until the carousel screen is displayed
+- extendedWaitUntil:
+    visible:
+      id: "${APP_ID}:id/description"
+    timeout: 10000
+- repeat:
+    times: 3 # Swipe left thrice
+    commands:
+      - swipe:
+          direction: LEFT
+- tapOn: "Get Started"
+
+# Permission requests
+- runFlow: ../common/allow-permissionrequest.yaml # Notification
+- runFlow: ../common/close-apperror.yaml # DEFECT: https://toyota-cvs-au.atlassian.net/browse/AR-2646
+- runFlow: ../common/allow-permissionrequest.yaml # Nearby Devices
+
+# Terms & Conditions
+- evalScript: ${output.ctr = 0}
+- repeat:
+    while:
+      notVisible: "I AGREE"
+      true: ${output.ctr < 40} # Terminate infinite swipe
+    commands:
+      - swipe:
+          direction: UP
+      - evalScript: ${output.ctr = output.ctr + 1}
+- tapOn: "I AGREE"
+- runFlow: ../common/allow-permissionrequest.yaml # Location

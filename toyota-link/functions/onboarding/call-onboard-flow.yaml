@@ -1,0 +1,8 @@
+appId: ${APP_ID}
+---
+- runFlow:
+    when:
+      visible:
+        id: "${APP_ID}:id/description"
+    commands:
+      - runFlow: ../onboarding/onboard-T&C.yaml
