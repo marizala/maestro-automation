@@ -1,0 +1,12 @@
+appId: ${APP_ID}
+---
+# Nearby Devices permission request
+- runFlow:
+    when:
+      visible: 
+        id: "com.android.permissioncontroller:id/permission_message"
+    commands:
+      - tapOn: # Use regex to click the Allow permission button
+          id: "com.android.permissioncontroller:id/permission_allow_(.*)"
+        # id: "com.android.permissioncontroller:id/permission_allow_foreground_only_button" # Location permission - While app is in use
+        # id: "com.android.permissioncontroller:id/permission_allow_button"

@@ -1,0 +1,10 @@
+appId: ${APP_ID}
+---
+# App Crash Error
+- runFlow:
+    when:
+      visible: 
+        id: "android:id/aerr_close"
+    commands:
+      - tapOn:
+          id: "android:id/aerr_close"
