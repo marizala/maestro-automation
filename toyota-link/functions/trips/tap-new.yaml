@@ -1,0 +1,17 @@
+appId: ${APP_ID}
+---
+- runFlow: ../common/view-panel-full.yaml
+
+# existing saved trips hides the NEW button at the bottom  
+- evalScript: ${output.ctr = 0}
+- repeat:
+    while:
+        notVisible: "NEW"
+        true: ${output.ctr < 5} # Terminate infinite swipe
+    commands:
+        - swipe: 
+            direction: UP
+        - evalScript: ${output.ctr = output.ctr + 1}
+- tapOn: "NEW"
+
+- evalScript: ${output.SET_tripname = "New Trip"} # Set default trip name

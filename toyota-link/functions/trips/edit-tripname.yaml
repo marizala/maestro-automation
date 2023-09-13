@@ -1,0 +1,13 @@
+appId: ${APP_ID}
+---
+# Click the title to edit
+- tapOn:
+    id: "${APP_ID}:id/title_fake"
+- tapOn:
+    point: "80%,8%" # Tap the [x] to delete full text
+- inputText: ${output.SET_tripname}
+
+#  To save
+- tapOn:
+    id: "${APP_ID}:id/description"
+- hideKeyboard
