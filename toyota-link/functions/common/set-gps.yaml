@@ -1,0 +1,5 @@
+appId: ${APP_ID}
+---
+- setLocation: # 473 Bourke Street
+    latitude: -37.8155628 
+    longitude: 144.959936

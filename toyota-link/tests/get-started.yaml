@@ -1,0 +1,21 @@
+appId: ${APP_ID}
+name: Get Started
+tags:
+  - onboard
+  - smoke
+onFlowStart:
+  - runFlow: ../functions/common/set-gps.yaml
+---
+- launchApp:
+    clearState: true
+    permissions:
+      all: unset # Display all permission requests in the app
+
+# Carousel screen
+- runFlow: ../functions/onboarding/onboard-T&C.yaml
+
+- runFlow: ../functions/map/tap-recentre.yaml
+- runFlow: ../functions/map/tap-mapmode.yaml
+- runFlow: ../functions/map/tap-mapmode.yaml
+- runFlow: ../functions/map/tap-mapmode.yaml
+- runFlow: ../functions/map/tap-info.yaml

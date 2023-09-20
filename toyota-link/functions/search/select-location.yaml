@@ -1,0 +1,18 @@
+appId: ${APP_ID}
+---
+# Search from location result list
+- inputText: ${output.SET_place}
+- evalScript: ${output.ctr = 0}
+- repeat:
+    while:
+        notVisible:
+            id: "${APP_ID}:id/title"
+            text: "${output.SET_place}"
+        true: ${output.ctr < 5} # Terminate infinite swipe
+    commands:
+        - swipe: 
+            direction: UP
+        - evalScript: ${output.ctr = output.ctr + 1}
+- tapOn: 
+    id: "${APP_ID}:id/title"
+    text: "${output.SET_place}"

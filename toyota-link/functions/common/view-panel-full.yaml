@@ -1,0 +1,14 @@
+appId: ${APP_ID}
+---
+- evalScript: ${output.ctr = 0}
+- repeat:
+    while:
+      visible:
+        id: "${APP_ID}:id/button_info"
+      true: ${output.ctr < 3} # Terminate infinite swipe
+    commands:
+      - swipe:
+          from:
+            id: "${APP_ID}:id/handle"
+          direction: UP
+      - evalScript: ${output.ctr = output.ctr + 1}
